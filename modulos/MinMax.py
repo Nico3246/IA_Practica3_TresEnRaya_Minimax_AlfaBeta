@@ -1,3 +1,4 @@
+import time
 class MiniMax:
     def __init__(self, estado,ficha):
         self.estado = estado
@@ -27,7 +28,6 @@ class MiniMax:
 
         return mejorJugada
 
-
     def MAX(self,estado):
         if estado.terminado():
             return estado.ganador(self.ficha)
@@ -56,6 +56,7 @@ class MiniMax:
         return valorMin
 
     def hacerJugada(self):
+        time.sleep(0.5)
         fila,columna=self.minimax(self.estado)
         self.estado.jugadaCoordenadas(fila,columna,self.ficha)
         self.estado.cambiarturno()
