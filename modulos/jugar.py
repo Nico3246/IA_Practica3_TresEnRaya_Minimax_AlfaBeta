@@ -12,7 +12,7 @@ def menu1():
     print("│" + " 1. Jugar contra otro jugador   " + "│")
     print("│" + " 2. Jugar contra Minimax        " + "│")
     print("│" + " 3. Jugar contra Alfa-Beta      " + "│")
-    print("│" + " 4. Salir                       " + "│")
+    print("│" + " 4. IA vs IA                    " + "│")
     print("└" + "────────────────────────────────" + "┘")
     opc1=int(input("Selecciona una opción: "))
     return opc1
@@ -42,14 +42,17 @@ def opcionesMenu1():
 
         if opc==1:
             jugarHumano()
-            break
+
 
         elif opc==2:
             opc2=menu2()
             fichaHumano,fichaIA=opcionesMenu2(opc2)
             jugarMiniMax(fichaHumano,fichaIA)
-            break
 
+        elif opc==4:
+            fichaHumano = "X"
+            fichaIA = "O"
+            minMaxVSminMAX(fichaHumano, fichaIA)
 
 
 
@@ -74,6 +77,7 @@ def opcionesMenu2(opc):
             fichaHumano="O"
             fichaIA="X"
             break
+
     return fichaHumano,fichaIA
 
 def jugarHumano():
@@ -93,7 +97,7 @@ def jugarHumano():
             print("Turno del jugador (" + fichaHumano1 +")")
             jugadorHumano1.hacerJugada()
         else:
-            print("Turno del jugador (" + fichaHumano1 +")")
+            print("Turno del jugador (" + fichaHumano2 +")")
             jugadorHumano2.hacerJugada()
 
     resultado = estado.comprobar()
@@ -130,6 +134,40 @@ def jugarMiniMax(fichaHumano,fichaIA):
             jugadorHumano.hacerJugada()
         else:
             print("Turno del jugador MinMax " + fichaIA)
+            jugadorMiniMax.hacerJugada()
+
+    resultado = estado.comprobar()
+
+    linea = estado.buscarLineaGanadora()
+    tablero.pintar(lineaGanadora=linea)
+
+    if resultado == "X":
+        print("El jugador 1 (X) ha ganado")
+    elif resultado == "O":
+        print("El jugador 2 (O) ha ganado")
+    else:
+        print("Empate")
+
+def minMaxVSminMAX(fichaIA1,fichaIA2):
+    tablero = Tablero()
+    estado = Estado(tablero)
+
+    if fichaIA1 == "X":
+        estado.turnoJugador = True
+    else:
+        estado.turnoJugador = False
+
+    jugadorHumano = MiniMax(estado, fichaIA1)
+    jugadorMiniMax = MiniMax(estado, fichaIA2)
+
+    while not estado.terminado():
+        tablero.pintar()
+        print("\n")
+        if estado.turnoJugador:
+            print("Turno del jugador MinMax1 " + fichaIA1)
+            jugadorHumano.hacerJugada()
+        else:
+            print("Turno del jugador MinMax2 " + fichaIA2)
             jugadorMiniMax.hacerJugada()
 
     resultado = estado.comprobar()

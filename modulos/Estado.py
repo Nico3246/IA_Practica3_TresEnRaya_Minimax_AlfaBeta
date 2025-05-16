@@ -1,15 +1,19 @@
 from Tablero import Tablero
 
 class Estado:
-    def __init__(self,tablero):
+    def __init__(self,tablero,fichaActual="X",turnoJugador=True):
         self.tablero = tablero
-        self.turnoJugador=True
+        self.turnoJugador=turnoJugador
+        self.fichaActual=fichaActual
 
-        
 
 
     def cambiarturno(self):#intercambia los turno
         self.turnoJugador=not self.turnoJugador
+        if self.fichaActual=="X":
+            self.fichaActual="O"
+        else:
+            self.fichaActual="X"
 
 
     def tableroLleno(self):
@@ -75,12 +79,12 @@ class Estado:
 
     def ganador(self,fichaIA):
         resultado=self.comprobar()
-        if resultado==fichaIA:
-            return 1  #gana ia
-        elif resultado==False:
-            return 0  #empate
+        if resultado is False:
+            return 0
+        if resultado== fichaIA:
+            return 1
         else:
-            return -1  #gana oponente
+            return -1
 
 
     def movimientosValidos(self):
@@ -96,23 +100,21 @@ class Estado:
         tableroCopia.tablero=[fila[:] for fila in self.tablero.tablero]#crea una copia del tablero que no modifica el original
         return tableroCopia
 
+
     def sucesores(self):
         sucesores=[]
-        if(self.turnoJugador):
-            ficha="X"
-        else:
-            ficha="O"
 
         for i,j in self.movimientosValidos():
-            tableroCopia=self.copiarTablero()#creo una copia del tablero
-            tableroCopia.tablero[i][j]=ficha#hago el movimiento en la copia
+            copia = self.copiarTablero()
+            copia.tablero[i][j] = self.fichaActual
 
-            nuevoEstado=Estado(tableroCopia)#creo un nuevo estado con la posible opcion
+            if self.fichaActual=="X":
+                ficha="O"
+            else:
+                ficha="X"
+            nuevoEstado=Estado(tablero=copia,fichaActual=ficha,turnoJugador=not self.turnoJugador)
 
-            nuevoEstado.turnoJugador=self.turnoJugador#copio el turno actual
-            nuevoEstado.cambiarturno()#cambio el turno en el nuevo estado
-
-            sucesores.append((nuevoEstado,(i,j)))#meto el nuevo estado en sucesores y la juagda
+            sucesores.append((nuevoEstado,(i,j)))
 
         return sucesores
 
@@ -141,10 +143,7 @@ class Estado:
             self.tablero.tablero[fila][columna]=jugador
 
     def jugadorActual(self):
-        if self.turnoJugador:
-            return "X"
-        else:
-            return "O"
+        return self.fichaActual
 
     def buscarLineaGanadora(self):
         for i in range(3):#buscar en horizontales
