@@ -4,6 +4,7 @@ class Estado:
     def __init__(self,tablero):
         self.tablero = tablero
         self.turnoJugador=True
+
         
 
 
@@ -108,6 +109,7 @@ class Estado:
 
             nuevoEstado=Estado(tableroCopia)#creo un nuevo estado con la posible opcion
 
+            nuevoEstado.turnoJugador=self.turnoJugador#copio el turno actual
             nuevoEstado.cambiarturno()#cambio el turno en el nuevo estado
 
             sucesores.append((nuevoEstado,(i,j)))#meto el nuevo estado en sucesores y la juagda

@@ -4,13 +4,27 @@ class MiniMax:
         self.ficha = ficha
 
     def minimax(self, estado):
-        mejorValor=float("-inf")
+        if estado.jugadorActual()==self.ficha:
+            mejorValor=float("-inf")
+        else:
+            mejorValor=float("inf")
         mejorJugada=None
+
         for sucesor,jugada in estado.sucesores():
-            valor = self.MIN(sucesor)
-            if valor>mejorValor:
-                mejorValor=valor
-                mejorJugada=jugada
+            if sucesor.jugadorActual() == self.ficha:
+                valor = self.MAX(sucesor)
+            else:
+                valor = self.MIN(sucesor)
+
+            if estado.jugadorActual()==self.ficha:
+                if valor>mejorValor:
+                    mejorValor=valor
+                    mejorJugada=jugada
+            else:
+                if valor<mejorValor:
+                    mejorValor=valor
+                    mejorJugada=jugada
+
         return mejorJugada
 
 
@@ -20,7 +34,11 @@ class MiniMax:
 
         valorMax=float("-inf")
         for sucesor,_ in estado.sucesores():
-            valorMax=max(valorMax,self.MIN(sucesor))
+            if sucesor.jugadorActual() == self.ficha:
+                valor=self.MAX(sucesor)
+            else:
+                valor=self.MIN(sucesor)
+            valorMax=max(valorMax,valor)
         return valorMax
 
 
@@ -30,7 +48,11 @@ class MiniMax:
 
         valorMin=float("inf")
         for sucesor,_ in estado.sucesores():
-            valorMin=min(valorMin,self.MAX(sucesor))
+            if sucesor.jugadorActual() == self.ficha:
+                valor=self.MAX(sucesor)
+            else:
+                valor=self.MIN(sucesor)
+            valorMin=min(valorMin,valor)
         return valorMin
 
     def hacerJugada(self):
