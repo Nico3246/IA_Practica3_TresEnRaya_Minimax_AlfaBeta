@@ -72,13 +72,14 @@ class Estado:
         else:
             return False
 
-    def ganador(self):
-        if self.comprobar()=="X":
-            return 1
-        elif self.comprobar()=="O":
-            return -1
+    def ganador(self,fichaIA):
+        resultado=self.comprobar()
+        if resultado==fichaIA:
+            return 1  #gana ia
+        elif resultado==False:
+            return 0  #empate
         else:
-            return 0
+            return -1  #gana oponente
 
 
     def movimientosValidos(self):
@@ -109,9 +110,10 @@ class Estado:
 
             nuevoEstado.cambiarturno()#cambio el turno en el nuevo estado
 
-            sucesores.append(nuevoEstado)#meto el nuevo estado en sucesores
+            sucesores.append((nuevoEstado,(i,j)))#meto el nuevo estado en sucesores y la juagda
 
         return sucesores
+
 
 
     def comprobarCasilla(self,pos):
@@ -127,16 +129,39 @@ class Estado:
         return fila, columna
 
 
-    def jugada(self,pos,jugador):
+    def jugada(self,pos,jugador):#para humano
         pos=self.traductor(pos)
         if self.comprobarCasilla(pos):
             self.tablero.tablero[pos[0]][pos[1]]=jugador
+
+    def jugadaCoordenadas(self,fila,columna,jugador):#para ia
+        if self.comprobarCasilla((fila,columna)):
+            self.tablero.tablero[fila][columna]=jugador
 
     def jugadorActual(self):
         if self.turnoJugador:
             return "X"
         else:
             return "O"
+
+    def buscarLineaGanadora(self):
+        for i in range(3):#buscar en horizontales
+            if self.tablero.tablero[i][0]==self.tablero.tablero[i][1]==self.tablero.tablero[i][2] and self.tablero.tablero[i][0]!=" ":
+                return [(i,0),(i,1),(i,2)]
+
+        for i in range(3):#buscar en verticales
+            if self.tablero.tablero[0][i]==self.tablero.tablero[1][i]==self.tablero.tablero[2][i] and self.tablero.tablero[0][i]!=" ":
+                return [(0,i),(1,i),(2,i)]
+
+        if self.tablero.tablero[0][0]==self.tablero.tablero[1][1]==self.tablero.tablero[2][2] and self.tablero.tablero[0][0]!=" ":
+            return [(0,0),(1,1),(2,2)]
+
+        if self.tablero.tablero[0][2]==self.tablero.tablero[1][1]==self.tablero.tablero[2][0] and self.tablero.tablero[0][2]!=" ":
+            return [(0,2),(1,1),(2,0)]
+
+        return None
+
+
 
 
 

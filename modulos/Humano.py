@@ -1,13 +1,14 @@
 
 class Humano:
-    def __init__(self,estado):
+    def __init__(self,estado,ficha):
         self.estado = estado
         self.tablero=estado.tablero
+        self.ficha=ficha
 
 
     def hacerJugada(self):
         while True:
-            pos=int(input("Introduce un movimiento: "))
+            pos=int(input("Introduce un movimiento " + self.ficha + ": "))
             if pos<1 or pos>9:
                 print("Movimiento incorrecto debe estar entre 1 y 9")
                 continue
@@ -17,10 +18,7 @@ class Humano:
                 print("Casilla ocupada, introduzca otra")
                 continue
 
-            if self.estado.jugadorActual()=="X":
-                self.estado.jugada(pos,"X")
-            else:
-                self.estado.jugada(pos,"O")
+            self.estado.jugada(pos,self.ficha)
             self.estado.cambiarturno()
             break
 
