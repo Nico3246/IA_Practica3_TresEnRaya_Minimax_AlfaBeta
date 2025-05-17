@@ -53,12 +53,8 @@ class AlfaBeta:
 
         return valor
 
-    def reiniciarNodos(self):
-        self.nodos = 0
-
     def hacerJugada(self):
         time.sleep(0.5)
-        self.reiniciarNodos()
         inicio = time.perf_counter_ns()
         fila,columna=self.AlfaBeta(self.estado)
         fin = time.perf_counter_ns()
@@ -67,7 +63,7 @@ class AlfaBeta:
         print("Nodos explorados: " + str(self.nodos))
         print("Tiempo empleado: " + str(duracion))
 
-        self.nodos += self.nodos
+        self.nodosTotal += self.nodos
         self.tiempoTotal += duracion
 
 

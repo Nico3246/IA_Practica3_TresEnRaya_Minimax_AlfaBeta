@@ -106,7 +106,6 @@ def opcionesMenu1():
             opcionesMenu3(opc3)
 
         elif opc==5:
-            mostrarResultados("HumanoVSHumano.txt")
             mostrarResultados("HumanoVSMinMax.txt")
             mostrarResultados("HumanoVSAlfaBeta.txt")
 

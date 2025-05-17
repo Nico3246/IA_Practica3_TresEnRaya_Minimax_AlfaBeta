@@ -61,12 +61,9 @@ class MiniMax:
         return valorMin
 
 
-    def reiniciarNodos(self):
-        self.nodos=0
 
     def hacerJugada(self):
         time.sleep(0.5)
-        self.reiniciarNodos()
         inicio = time.perf_counter_ns()
         fila,columna=self.minimax(self.estado)
         fin = time.perf_counter_ns()
@@ -75,7 +72,7 @@ class MiniMax:
         print("Nodos explorados: " + str(self.nodos))
         print("Tiempo empleado: " + str(duracion))
 
-        self.nodos+=self.nodos
+        self.nodosTotal+=self.nodos
         self.tiempoTotal+=duracion
 
         self.estado.jugadaCoordenadas(fila,columna,self.ficha)
