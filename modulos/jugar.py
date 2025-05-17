@@ -79,6 +79,10 @@ def jugarMiniMax(fichaHumano,fichaIA):
     else:
         print("Empate")
 
+    print("Total de nodos explorados por MiniMax: " + str(jugadorMiniMax.nodosTotal))
+    print("Tiempo total empleado por MiniMax: " + str(jugadorMiniMax.tiempoTotal))
+
+
     return resultado
 
 
@@ -116,6 +120,9 @@ def jugarAlfaBeta(fichaHumano,fichaIA):
         print("El jugador 2 (O) ha ganado")
     else:
         print("Empate")
+
+    print("Total de nodos explorados por Alfa-Beta: " + str(jugadorAlfaBeta.nodosTotal))
+    print("Tiempo total empleado por Alfa-Beta: " + str(jugadorAlfaBeta.tiempoTotal))
 
     return resultado
 
@@ -155,8 +162,11 @@ def minMaxVSminMAX(fichaIA1,fichaIA2):
     else:
         print("Empate")
 
-
-
+    print("Total de nodos explorados por MiniMax1: " + str(jugador1.nodosTotal))
+    print("Tiempo total empleado por MiniMax1: " + str(jugador1.tiempoTotal))
+    print("\n")
+    print("Total de nodos explorados por MiniMax2: " + str(jugador2.nodosTotal))
+    print("Tiempo total empleado por MiniMax2: " + str(jugador2.tiempoTotal))
 
 
 def AlfaBetaVSAlfaBeta(fichaIA1,fichaIA2):
@@ -193,7 +203,11 @@ def AlfaBetaVSAlfaBeta(fichaIA1,fichaIA2):
     else:
         print("Empate")
 
-
+    print("Total de nodos explorados por Alfa-Beta1: " + str(jugador1.nodosTotal))
+    print("Tiempo total empleado por Alfa-Beta1: " + str(jugador1.tiempoTotal))
+    print("\n")
+    print("Total de nodos explorados por Alfa-Beta2: " + str(jugador2.nodosTotal))
+    print("Tiempo total empleado por Alfa-Beta2: " + str(jugador2.tiempoTotal))
 
 
 
@@ -230,6 +244,12 @@ def MiniMaxVSAlfaBeta(fichaIA1,fichaIA2):
         print("El jugador 2 (O) ha ganado")
     else:
         print("Empate")
+
+    print("Total de nodos explorados por MiniMax: " + str(jugador1.nodosTotal))
+    print("Tiempo total empleado por MiniMax: " + str(jugador1.tiempoTotal))
+    print("\n")
+    print("Total de nodos explorados por Alfa-Beta: " + str(jugador2.nodosTotal))
+    print("Tiempo total empleado por Alfa-Beta: " + str(jugador2.tiempoTotal))
 
 def mostrarResultados(archivo):
     contador=Contador(archivo)

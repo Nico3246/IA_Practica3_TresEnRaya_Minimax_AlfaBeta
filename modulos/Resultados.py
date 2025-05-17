@@ -4,7 +4,6 @@ class Contador:
         self.VictoriaIA=0
         self.empate=0
         self.nombreArchivo=nombreArchivo
-        self.cargar()
 
     def resultados(self,resultado,fichaHumano,FichaIA):
         if resultado==fichaHumano:
