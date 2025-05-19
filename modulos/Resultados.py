@@ -6,7 +6,7 @@ class Contador:
         self.nombreArchivo=nombreArchivo
         self.cargar()
 
-    def resultados(self,resultado,fichaHumano,FichaIA):
+    def resultados(self,resultado,fichaHumano,FichaIA):#metodo que incrementa las puntuaciones segun los resultados optenidos
         if resultado==fichaHumano:
             self.VictoriaHumano+=1
         elif resultado==FichaIA:
@@ -16,7 +16,7 @@ class Contador:
         self.guardarResultados()
 
 
-    def mostrarResultados(self):
+    def mostrarResultados(self):#muestra los resultados
         if self.nombreArchivo=="HumanoVSMinMax.txt":
             m="Humano VS MinMax"
         else:
@@ -34,13 +34,13 @@ class Contador:
         print("└" + "───────────────────────────────────────────" + "┘")
 
 
-    def guardarResultados(self):
+    def guardarResultados(self):#guarda los resuñtados en el fichero
         with open(self.nombreArchivo,"w") as f:
             f.write(str(self.VictoriaHumano)+"\n")
             f.write(str(self.VictoriaIA)+"\n")
             f.write(str(self.empate)+"\n")
 
-    def cargar(self):
+    def cargar(self):#carga los resultados contidos en el fichero
 
         f = open(self.nombreArchivo, "a+")
         f.seek(0)

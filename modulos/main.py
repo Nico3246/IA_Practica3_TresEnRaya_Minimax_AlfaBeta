@@ -1,7 +1,7 @@
 from menus import opcionesMenu1
 
 
-def reiniciar():
+def reiniciar():#funcion para poner a 0 los resultados almacenados en el fichero
     archivos = [
         "HumanoVSMinMax.txt",
         "HumanoVSAlfaBeta.txt"

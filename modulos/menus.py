@@ -55,7 +55,7 @@ def menu4():
     return opc2
 
 
-def opcionesMenu1():
+def opcionesMenu1():#funcion que contiene las opciones del menu principal
     while True:
         opc=menu1()
         if opc<1 or opc>6:
@@ -76,13 +76,12 @@ def opcionesMenu1():
                 if opc2==3:
                     continue
 
-                fichaHumano,fichaIA=opcionesMenu2(opc2)
-                resultado=jugarMiniMax(fichaHumano,fichaIA)
-                contador=Contador(archivo)
+                fichaHumano,fichaIA=opcionesMenu2(opc2)#almacena la asignacion de fichas elegida
+                resultado=jugarMiniMax(fichaHumano,fichaIA)#llama a la funcion para jugar y alamcena el resultado
+                contador=Contador(archivo)#llama a contador para sumarle un punto al que ha ganado y guardarlo en el fichero
                 contador.resultados(resultado,fichaHumano,fichaIA)
-
             elif seleccion==2:
-                mostrarResultados(archivo)
+                mostrarResultados(archivo)#muestra el contenido del archivo
 
 
         elif opc==3:
@@ -94,12 +93,12 @@ def opcionesMenu1():
                 if opc2==3:
                     continue
 
-                fichaHumano,fichaIA=opcionesMenu2(opc2)
-                resultado=jugarAlfaBeta(fichaHumano,fichaIA)
-                contador=Contador(archivo)
+                fichaHumano,fichaIA=opcionesMenu2(opc2)#almacena la asignacion de fichas elegida
+                resultado=jugarAlfaBeta(fichaHumano,fichaIA)#llama a la funcion para jugar y alamcena el resultado
+                contador=Contador(archivo)#llama a contador para sumarle un punto al que ha ganado y guardarlo en el fichero
                 contador.resultados(resultado,fichaHumano,fichaIA)
             elif seleccion==2:
-                mostrarResultados(archivo)
+                mostrarResultados(archivo)#muestra el contenido del archivo
 
         elif opc==4:
             opc3=menu3()
@@ -116,7 +115,7 @@ def opcionesMenu1():
 
 
 
-def opcionesMenu2(opc):
+def opcionesMenu2(opc):#funcion que contiene las opciones del menu para elegir ficha
     while True:
         if opc < 1 or opc > 3:
             print("Seleccion incorrecta.Introduce una opcion entre 1 y 4")
@@ -132,12 +131,12 @@ def opcionesMenu2(opc):
             ficha2="X"
             break
 
-    return ficha1,ficha2
+    return ficha1,ficha2#devuelve las fichas elegidas
 
 
 
 
-def opcionesMenu3(opc):
+def opcionesMenu3(opc):#funcion con las opciones para el menu de IA vs IA
     while True:
         if opc < 1 or opc > 4:
             print("Seleccion incorrecta.Introduce una opcion entre 1 y 4")
@@ -147,17 +146,17 @@ def opcionesMenu3(opc):
         if opc==1:
             ficha1="X"
             ficha2="O"
-            minMaxVSminMAX(ficha1, ficha2)
+            minMaxVSminMAX(ficha1, ficha2)#inicia una partida de minmax vs minmax
             break
 
         elif opc==2:
             ficha1="X"
             ficha2="O"
-            AlfaBetaVSAlfaBeta(ficha1, ficha2)
+            AlfaBetaVSAlfaBeta(ficha1, ficha2)#inicia una partida de alfaBeta vs alfabeta
             break
 
         elif opc==3:
             ficha1="X"
             ficha2="O"
-            MiniMaxVSAlfaBeta(ficha1, ficha2)
+            MiniMaxVSAlfaBeta(ficha1, ficha2)#inicia una partida de minmax vs alfabeta
             break

@@ -5,17 +5,19 @@ from MinMax import MiniMax
 from AlfaBeta import AlfaBeta
 from Resultados import Contador
 
-def jugarHumano():
+def jugarHumano():#funcion apra que jueguen dos humano
     tablero = Tablero()
     estado = Estado(tablero)
 
+    #asigna las fichas por defecto a cada juagdor
     fichaHumano1 = "X"
     fichaHumano2 = "O"
 
+    #crea dos jugadores
     jugadorHumano1 = Humano(estado, fichaHumano1)
     jugadorHumano2 = Humano(estado, fichaHumano2)
 
-    while not estado.terminado():
+    while not estado.terminado():#mientra el juego no termine alterna los turnos y cada jugador va haciendo su jugada
         tablero.pintar()
         print("\n")
         if estado.turnoJugador:
@@ -25,12 +27,12 @@ def jugarHumano():
             print("Turno del jugador (" + fichaHumano2 +")")
             jugadorHumano2.hacerJugada()
 
-    resultado = estado.comprobar()
+    resultado = estado.comprobar()#almacena el resultado
 
-    linea = estado.buscarLineaGanadora()
-    tablero.pintar(lineaGanadora=linea)
+    linea = estado.buscarLineaGanadora()#almacena la linea ganadora si la hay
+    tablero.pintar(lineaGanadora=linea)#si hay una linea ganadora pinta el tablero
 
-    if resultado == "X":
+    if resultado == "X":#muestra los resultados
         print("El jugador 1 (X) ha ganado")
 
     elif resultado == "O":
@@ -44,20 +46,21 @@ def jugarHumano():
 
 
 
-def jugarMiniMax(fichaHumano,fichaIA):
+def jugarMiniMax(fichaHumano,fichaIA):#funcion para que juegue un humano contra minMax
     tablero = Tablero()
     estado = Estado(tablero)
 
-
+    #empieza el jugador que tenga la X
     if fichaHumano == "X":
         estado.turnoJugador = True
     else:
         estado.turnoJugador = False
 
+    #crea un humano y un jugador MinMax
     jugadorHumano = Humano(estado, fichaHumano)
     jugadorMiniMax = MiniMax(estado, fichaIA)
 
-    while not estado.terminado():
+    while not estado.terminado():#mientra el juego no termine alterna los turnos y cada jugador va haciendo su jugada
         tablero.pintar()
         print("\n")
         if estado.turnoJugador:
@@ -87,19 +90,21 @@ def jugarMiniMax(fichaHumano,fichaIA):
 
 
 
-def jugarAlfaBeta(fichaHumano,fichaIA):
+def jugarAlfaBeta(fichaHumano,fichaIA):#funcion para que juegue un humano contra AlfaBeta
     tablero = Tablero()
     estado = Estado(tablero)
 
+    # empieza el jugador que tenga la X
     if fichaHumano == "X":
         estado.turnoJugador = True
     else:
         estado.turnoJugador = False
 
+    # crea un humano y un jugador AlfaBeta
     jugadorHumano = Humano(estado, fichaHumano)
     jugadorAlfaBeta = AlfaBeta(estado, fichaIA)
 
-    while not estado.terminado():
+    while not estado.terminado():#mientra el juego no termine alterna los turnos y cada jugador va haciendo su jugada
         tablero.pintar()
         print("\n")
         if estado.turnoJugador:
@@ -128,7 +133,7 @@ def jugarAlfaBeta(fichaHumano,fichaIA):
 
 
 
-def minMaxVSminMAX(fichaIA1,fichaIA2):
+def minMaxVSminMAX(fichaIA1,fichaIA2):#funcion para que jueguen dos MinMax
     tablero = Tablero()
     estado = Estado(tablero)
 
@@ -169,7 +174,7 @@ def minMaxVSminMAX(fichaIA1,fichaIA2):
     print("Tiempo total empleado por MiniMax2: " + str(jugador2.tiempoTotal))
 
 
-def AlfaBetaVSAlfaBeta(fichaIA1,fichaIA2):
+def AlfaBetaVSAlfaBeta(fichaIA1,fichaIA2):#funcion para que jueguen dos AlfaBeta
     tablero = Tablero()
     estado = Estado(tablero)
 
@@ -211,7 +216,7 @@ def AlfaBetaVSAlfaBeta(fichaIA1,fichaIA2):
 
 
 
-def MiniMaxVSAlfaBeta(fichaIA1,fichaIA2):
+def MiniMaxVSAlfaBeta(fichaIA1,fichaIA2):#funcion para que juegue un MinMax contra un alfaBeta
     tablero = Tablero()
     estado = Estado(tablero)
 
@@ -251,7 +256,7 @@ def MiniMaxVSAlfaBeta(fichaIA1,fichaIA2):
     print("Total de nodos explorados por Alfa-Beta: " + str(jugador2.nodosTotal))
     print("Tiempo total empleado por Alfa-Beta: " + str(jugador2.tiempoTotal))
 
-def mostrarResultados(archivo):
+def mostrarResultados(archivo):#funcion para ver los resultados almacenados en el archivo
     contador=Contador(archivo)
     contador.mostrarResultados()
 
