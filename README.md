@@ -4,7 +4,6 @@ Práctica universitaria de **Inteligencia Artificial** desarrollada en **Python*
 
 El proyecto permite jugar partidas entre personas y agentes inteligentes, además de enfrentar entre sí distintas estrategias para observar su comportamiento y comparar métricas como el número de nodos explorados y el tiempo de cálculo.
 
-> Este repositorio tiene finalidad académica y refleja el desarrollo realizado durante la práctica.
 
 ---
 
